@@ -31,44 +31,40 @@ const Signup = () => {
     //   console.log("User is too young to register.");
     //   return; // Don't proceed with registration
     // }
-    const token = response.data.token
-            localStorage.setItem('token', token)
+    // const token = response.data.token
+    //         localStorage.setItem('token', token)
 
-            if (response.data.Type === 'Parent') {
-                if (selectedRole === 'Parent') {
-                    navigate('/parent')
-                    alert(username)
-                }
-            }
-            if (response.data.Type === 'Admin') {
-                if (selectedRole === 'Admin') {
-                    navigate('/admin')
-                    alert(username)
-                }
-            }
-            if (response.data.Type === 'Tutor') {
-              if (selectedRole === 'Tutor') {
-                  navigate('/tutor')
-                  alert(username)
-              }
-          }
-          if (response.data.Type === 'Student') {
-                if (selectedRole === 'Student') {
-                    navigate('/student')
-                    alert(username)
-                }
-            }
-            if (response.data.Type === 'Supervisor') {
-              if (selectedRole === 'Supervisor') {
-                  navigate('/supervisor')
-                  alert(username)
-              }
-          }
+    //         if (response.data.Type === 'Parent') {
+    //             if (selectedRole === 'Parent') {
+    //                 navigate('/parent')
+    //                 alert(username)
+    //             }
+    //         }
+    //         if (response.data.Type === 'Admin') {
+    //             if (selectedRole === 'Admin') {
+    //                 navigate('/admin')
+    //                 alert(username)
+    //             }
+    //         }
+    //         if (response.data.Type === 'Tutor') {
+    //           if (selectedRole === 'Tutor') {
+    //               navigate('/tutor')
+    //               alert(username)
+    //           }
+    //       }
+    //       if (response.data.Type === 'Student') {
+    //             if (selectedRole === 'Student') {
+    //                 navigate('/student')
+    //                 alert(username)
+    //             }
+    //         }
+    //         if (response.data.Type === 'Supervisor') {
+    //           if (selectedRole === 'Supervisor') {
+    //               navigate('/supervisor')
+    //               alert(username)
+    //           }
+    //       }
         
-
-        
-        
-
     await signup(username, email, birthdate, password, selectedRole);
   };
 
