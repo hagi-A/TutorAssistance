@@ -2,11 +2,15 @@ import React from 'react'
 import './hero.css'
 import Title from '../../common/title/Title'
 import { FaArrowRight } from "react-icons/fa";
+import Header from '../../common/heading/Header';
+
+
 
 const Hero = () => {
     
   return (
     <>
+        <Header />
         <section className='hero'>
          <div className='container'>
           <div className='row'>

@@ -43,7 +43,7 @@ button {
 .row {
   width: 50%;
 }
-button {
+/* button {
   padding: 17px 30px;
   background-color: #fff;
   color: #8c8fbb;
@@ -64,8 +64,8 @@ button:hover {
 .primary-btn {
   background-color: #8c8fbb;
   color: #fff;
-
-}
+ 
+} */
 
 /*------------global-----------*/
 #heading {

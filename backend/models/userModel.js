@@ -14,17 +14,26 @@ const userSchema = new Schema({
     required: true,
     unique: true
   },
+  age: {
+    type: Number,
+    required: true,
+  },
   password: {
     type: String,
     required: true
-  }
+  },
+  role: {
+    type: String,
+    enum: ['Admin', 'Parent', 'Student', 'Tutor', 'Supervisor'],
+    required: true,
+  },
 })
 
 // static signup method
-userSchema.statics.signup = async function(username, email, password) {
+userSchema.statics.signup = async function(username, email, birthdate, password, role) {
 
     // validation
-  if  (!username || !email || !password) {
+  if  (!username || !email || !birthdate || !password) {
     throw Error('All fields must be filled')
   }
 
@@ -46,10 +55,18 @@ userSchema.statics.signup = async function(username, email, password) {
     throw Error('Email already in use')
   }
 
+  const birthYear = new Date(birthdate).getFullYear();
+  const currentYear = new Date().getFullYear();
+  const age = currentYear - birthYear;
+
+  if (age < 12) {
+    throw Error('User is too young to register');
+  }
+
   const salt = await bcrypt.genSalt(10)
   const hash = await bcrypt.hash(password, salt)
 
-  const user = await this.create({username, email, password: hash })
+  const user = await this.create({username, email, birthdate, age, password: hash })
 
   return user
 }

@@ -21,3 +21,5 @@ const requireAuth = async (req, res, next) => {
        res.statue(401).json({ error: 'Request is not autherized'})
     }
 }
+
+module.exports = requireAuth;

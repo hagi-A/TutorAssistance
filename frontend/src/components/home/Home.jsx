@@ -5,6 +5,7 @@ import AboutCard from '../about/AboutCard'
 const Home = () => {
   return (
     <>
+    
        <Hero />
        <AboutCard />
     </>

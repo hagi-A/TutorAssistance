@@ -1,40 +1,86 @@
 import { useState } from "react";
 import { useSignup } from "../../hooks/useSignup";
-import { Link } from "react-router-dom";
-import { useAuthContext } from "../../hooks/useAuthContext";
+import { Link , useNavigate} from "react-router-dom";
+// import { useAuthContext } from "../../hooks/useAuthContext";
 import { FaGoogle } from "react-icons/fa6";
 import loginImage from "../../images/loginImage.jpg";
 
 const Signup = () => {
+  const navigate = useNavigate()
   const [username, setUserName] = useState("");
   const [email, setEmail] = useState("");
+  const [birthdate, setBirthdate] = useState(""); // Add birthdate state
   const [password, setPassword] = useState("");
   const { signup, error, isLoading } = useSignup();
-  const { user } = useAuthContext();
+  // const { user } = useAuthContext();
+  const [selectedRole, setSelectedRole] = useState("");
+
+  // const handleRoleChange = (e) => {
+  //   setSelectedRole(e.target.value);
+  // };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    await signup(username, email, password);
+    // // Calculate age based on birthdate
+    // const birthYear = new Date(birthdate).getFullYear();
+    // const currentYear = new Date().getFullYear();
+    // const age = currentYear - birthYear;
+
+    // if (age < 12) {
+    //   console.log("User is too young to register.");
+    //   return; // Don't proceed with registration
+    // }
+    const token = response.data.token
+            localStorage.setItem('token', token)
+
+            if (response.data.Type === 'Parent') {
+                if (selectedRole === 'Parent') {
+                    navigate('/parent')
+                    alert(username)
+                }
+            }
+            if (response.data.Type === 'Admin') {
+                if (selectedRole === 'Admin') {
+                    navigate('/admin')
+                    alert(username)
+                }
+            }
+            if (response.data.Type === 'Tutor') {
+              if (selectedRole === 'Tutor') {
+                  navigate('/tutor')
+                  alert(username)
+              }
+          }
+          if (response.data.Type === 'Student') {
+                if (selectedRole === 'Student') {
+                    navigate('/student')
+                    alert(username)
+                }
+            }
+            if (response.data.Type === 'Supervisor') {
+              if (selectedRole === 'Supervisor') {
+                  navigate('/supervisor')
+                  alert(username)
+              }
+          }
+        
+
+        
+        
+
+    await signup(username, email, birthdate, password, selectedRole);
   };
 
   return (
     <>
-      {/* <nav className="flex justify-end  bg-opacity-20">
-        {!user && (
-          <div className="text-violet-400 font-light hover:transform mt-6">
-            <Link to="/login">Login</Link>
-            <Link to="/signup">Sign up</Link>
-          </div>
-        )} */}
-      {/* </nav> */}
       <div className="flex items-center justify-center min-h-screen bg-gray-100">
         <div className="relative flex flex-col m-6 mt-2 space-y-8 bg-white shadow-2xl rounded-2xl md:flex-row md:space-y-0">
           {/* <!-- left side --> */}
           <div className="flex flex-col justify-center p-2 md:p-14">
             <span class=" text-4xl font-light">Hello!</span>
             <span class="font-light text-violet-300 mb-4">
-             Please enter your details
+              Please enter your details
             </span>
 
             <form onSubmit={handleSubmit}>
@@ -62,6 +108,17 @@ const Signup = () => {
               </div>
               <div className="py-4 mb-2">
                 <label>
+                  <span className="mb-2 text-md font-light">Birth Date: </span>
+                </label>
+                <input
+                  type="date"
+                  onChange={(e) => setBirthdate(e.target.value)}
+                  value={birthdate}
+                  className="w-full p-2 border  border-violet-400 rounded-md placeholder:font-light placeholder:text-gray-500"
+                />
+              </div>
+              <div className="py-4 mb-2">
+                <label>
                   <span className="mb-2 text-md font-light">Password:</span>
                 </label>
                 <input
@@ -70,6 +127,23 @@ const Signup = () => {
                   value={password}
                   className="w-full p-2 border border-violet-400 rounded-md placeholder:font-light placeholder:text-gray-500"
                 />
+              </div>
+              <div className="py-4 mb-2">
+                <label>
+                  <span className="mb-2 text-md font-light">Role:</span>
+                </label>
+                <select
+                  value={selectedRole}
+                  onChange={(e) => setSelectedRole(e.target.value)}
+                  className="w-full p-2 border border-violet-400 rounded-md focus:ring focus:ring-blue-400"
+                >
+                  <option value="">Select Role</option>
+                  <option value="Admin">Admin</option>
+                  <option value="Parent">Parent</option>
+                  <option value="Student">Student</option>
+                  <option value="Tutor">Tutor</option>
+                  <option value="Supervisor">Supervisor</option>
+                </select>
               </div>
               {/* <div class="flex justify-between w-full py-4">
                 <span class="font-bold text-md">Forgot password</span>
@@ -114,31 +188,6 @@ const Signup = () => {
           </div>
         </div>
       </div>
-      {/* <form className="signup" onSubmit={handleSubmit}>
-        <h3>Sign Up</h3>
-
-        <label>User Name: </label>
-        <input
-          type="text"
-          onChange={(e) => setUserName(e.target.value)}
-          value={username}
-        />
-        <label>Email: </label>
-        <input
-          type="email"
-          onChange={(e) => setEmail(e.target.value)}
-          value={email}
-        />
-        <label>Password: </label>
-        <input
-          type="password"
-          onChange={(e) => setPassword(e.target.value)}
-          value={password}
-        />
-
-        <button disabled={isLoading}>Sign up</button>
-        {error && <div className="error">{error}</div>}
-      </form> */}
     </>
   );
 };

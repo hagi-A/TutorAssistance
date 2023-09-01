@@ -24,7 +24,7 @@ header li {
 }
 header ul li a {
   color: #ffffff;
-  font-weight: 500;
+  font-weight: lighter;
   transition: 0.5s;
 }
 header ul li a:hover {
